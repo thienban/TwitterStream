@@ -7,11 +7,18 @@ interface InputProps {
     Name: string;
     onChange : (val: any) => void
 }
+const StyleInput = styled.input   `
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+border: 1px solid #ccc;
+`;
 
 const Input: React.FC<InputProps> =
     ({ Input, Name, Type, onChange}) => {
         const input = (
-            <input 
+            <StyleInput 
             value={Input} 
             name={Name}
             onChange={e => onChange(e)} type={Type} />
@@ -19,11 +26,4 @@ const Input: React.FC<InputProps> =
         return input;
     }
 
-    const StyleInput = styled(Input)`
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 3px solid #ccc;
-    `;
-export default StyleInput;
+export default Input;

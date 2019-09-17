@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid2Columns, Grid1Columns} from './components/grid'
 import Input from './components/input';
+import Button from './components/button'
 import {useUserfrom} from './hooks/formHook';
 const App: React.FC = () => {
   const { inputs, handleInputChange } = useUserfrom({});
@@ -21,8 +22,8 @@ const App: React.FC = () => {
         onChange= {handleInputChange}
         
       />
-      <button>Nique React</button>
-      <button>Reset</button>
+      <Button>Nique React</Button>
+      <Button>Reset</Button>
       </Grid2Columns>
       <Grid1Columns>
         <p>Graphique</p>
