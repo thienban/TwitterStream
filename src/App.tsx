@@ -12,6 +12,18 @@ const App: React.FC = () => {
   `;
   const { inputs, handleInputChange } = useUserfrom({});
   console.log(inputs);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const term = inputs ? inputs.input1:"";
+    fetch("/setSearchTerm",
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ term })
+      })
+  }
   return (
     <Background>
       <Grid2Columns>
@@ -28,8 +40,8 @@ const App: React.FC = () => {
         onChange= {handleInputChange}
 
       />
-      <Button>Nique React</Button>
-      <Button>Reset</Button>
+      <Button label="GO" onClick={handleSubmit}/>
+      <Button label="RESET" onClick={handleSubmit}/>
       </Grid2Columns>
       <Grid1Columns>
         <List/>

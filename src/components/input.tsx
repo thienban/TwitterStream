@@ -18,8 +18,8 @@ border: 1px solid #ccc;
 const Input: React.FC<InputProps> =
     ({ Input, Name, Type, onChange}) => {
         const input = (
-            <StyleInput 
-            value={Input} 
+            <StyleInput
+            value={Input}
             name={Name}
             onChange={e => onChange(e)} type={Type} />
         );
