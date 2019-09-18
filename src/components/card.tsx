@@ -42,7 +42,7 @@ const CardComponent: React.FC<CardProps> = ({id, data}) => {
         return (
             <Container key={id}>
                 <div>
-                    <StyledPhoto src={data.user.profile_image_url} alt={data.user.name} className="circle responsive-img" />
+                    <StyledPhoto src={data.user.profile_image_url} alt={data.user.name}/>
                     <ActionButton>
                         {new Date(data.created_at).toLocaleTimeString()}
                     </ActionButton>
