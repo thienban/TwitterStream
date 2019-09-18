@@ -21,6 +21,8 @@ module.exports = (app, io) => {
         console.log('Resuming for ' + app.locals.searchTerm);
         twitter.stream('statuses/filter', { track: app.locals.searchTerm }, (stream) => {
             stream.on('data', (tweet) => {
+                console.log("tweet");
+                console.log(tweet);
                 sendMessage(tweet);
             });
 
@@ -52,7 +54,7 @@ module.exports = (app, io) => {
 
     /**
      * Emits data from stream.
-     * @param {String} msg 
+     * @param {String} msg
      */
     const sendMessage = (msg) => {
         if (msg.text.includes('RT')) {

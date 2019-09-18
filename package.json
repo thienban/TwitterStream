@@ -6,6 +6,7 @@
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
     "@types/react-dom": "16.9.0",
+    "@types/socket.io-client": "^1.4.32",
     "@types/styled-components": "^4.1.19",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
@@ -41,5 +42,17 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.2"
-  }
+  },
+  "description": "This repository contains",
+  "main": "twitter-client-example.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/axel.bie/thien-ban-bui.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/axel.bie/thien-ban-bui/issues"
+  },
+  "homepage": "https://gitlab.com/axel.bie/thien-ban-bui#README"
 }
