@@ -7,7 +7,7 @@ interface InputProps {
     Name: string;
     onChange : (val: any) => void
 }
-const StyleInput = styled.input   `
+const StyleInput = styled.input`
 width: 100%;
 padding: 12px 20px;
 margin: 8px 0;
