@@ -28,8 +28,8 @@ const TweetList: React.FC = () => {
     const loading = <div>
       <p>Listening to Streams</p>
     </div>
-    const itemsCards = list.map((x, i) =>
-      <CardComponent key={i} data={x} />
+    const itemsCards = list.map((x) =>
+      <CardComponent id={x.id} data={x} />
     )
     return (
         <div>

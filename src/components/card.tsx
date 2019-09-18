@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
   border: 1px solid;
-  padding: 25px 12px 18px;
+  padding: 20px 10px 15px;
+  margin: 8px 0;
   width: 20%;
   height: 20%;
   margin-top: 5px;
   margin-bottom: 10px;
+  background: white;
 `
 const StyledPhoto = styled.img`
   margin: 0 5px;
@@ -33,12 +35,12 @@ const Description = styled.p`
   font-weight: 300;
 `
 interface CardProps {
-    key: number
+    id: number
     data: any
 }
-const CardComponent: React.FC<CardProps> = ({key, data}) => {
+const CardComponent: React.FC<CardProps> = ({id, data}) => {
         return (
-            <Container key={key}>
+            <Container key={id}>
                 <div>
                     <StyledPhoto src={data.user.profile_image_url} alt={data.user.name} className="circle responsive-img" />
                     <ActionButton>

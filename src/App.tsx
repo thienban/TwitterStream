@@ -4,12 +4,16 @@ import Input from './components/input';
 import Button from './components/button'
 import {useUserfrom} from './hooks/formHook';
 import List from './components/list';
+import styled from "styled-components";
 
 const App: React.FC = () => {
+  const Background = styled.div`
+  background: linear-gradient(20deg, rgb(219, 112, 147), rgb(218, 163, 87));
+  `;
   const { inputs, handleInputChange } = useUserfrom({});
   console.log(inputs);
   return (
-    <div>
+    <Background>
       <Grid2Columns>
       <Input
         Type="text"
@@ -33,7 +37,7 @@ const App: React.FC = () => {
       <Grid1Columns>
         <p>Graphique</p>
       </Grid1Columns>
-    </div>
+    </Background>
   );
 }
 
