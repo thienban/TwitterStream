@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Grid2Columns, Grid1Columns} from './components/grid'
 import Input from './components/input';
 import Button from './components/button'
@@ -7,6 +7,7 @@ import List from './components/list';
 import styled from "styled-components";
 
 const App: React.FC = () => {
+  const [reset, setReset] = useState(false);
   const Background = styled.div`
   background: linear-gradient(20deg, rgb(219, 112, 147), rgb(218, 163, 87));
   `;
@@ -32,7 +33,10 @@ const App: React.FC = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-      })
+      }).then(res => {
+        console.log(res);
+        setReset(true);
+      }) ;
   }
   return (
     <Background>
@@ -54,7 +58,7 @@ const App: React.FC = () => {
       <Button label="RESET" onClick={handleReset}/>
       </Grid2Columns>
       <Grid1Columns>
-        <List/>
+        <List mustReset={reset}/>
       </Grid1Columns>
       <Grid1Columns>
         <p>Graphique</p>

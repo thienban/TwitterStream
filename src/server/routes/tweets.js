@@ -9,17 +9,15 @@ module.exports = (app, io) => {
     });
 
     let socketConnection;
-    let twitterStream;
-
-    app.locals.searchTerm = 'JavaScript'; //Default search term for twitter stream.
-    app.locals.showRetweets = false; //Default
+    let twitterStream = {};
 
     /**
      * Resumes twitter stream.
      */
-    const stream = () => {
-        console.log('Resuming for ' + app.locals.searchTerm);
-        twitter.stream('statuses/filter', { track: app.locals.searchTerm }, (stream) => {
+    let stream = (term) => {
+        console.log('Resuming for ' + term);
+        twitter.stream('statuses/filter', { track: term }, (stream) => {
+            twitterStream = stream;
             stream.on('data', (tweet) => {
                 sendMessage(tweet);
             });
@@ -28,7 +26,6 @@ module.exports = (app, io) => {
                 console.log(error);
             });
 
-            twitterStream = stream;
         });
     }
 
@@ -37,24 +34,22 @@ module.exports = (app, io) => {
      */
     app.post('/setSearchTerm', (req, res) => {
         let term = req.body.term;
-        app.locals.searchTerm = term;
-        twitterStream.destroy();
-        stream();
+        res.send('SetSearchTerm')
+        destroyStream(twitterStream);
+        stream(term);
     });
     /**
      * Pauses the twitter stream.
      */
     app.post('/pause', (req, res) => {
         console.log('Pause');
-        twitterStream.destroy();
+        res.send('pause');
+        destroyStream(twitterStream);
     });
 
     //Establishes socket connection.
     io.on("connection", socket => {
         socketConnection = socket;
-        stream();
-        socket.on("connection", () => console.log("Client connected"));
-        socket.on("disconnect", () => console.log("Client disconnected"));
     });
 
     /**
@@ -66,5 +61,12 @@ module.exports = (app, io) => {
             return;
         }
         socketConnection.emit("tweets", msg);
+        console.log("SendMessage")
+    }
+    const destroyStream = (stream) => {
+        if (Object.keys(stream).length != 0) {
+            console.log("Destroy Stream");
+            stream.destroy();
+        }
     }
 };
