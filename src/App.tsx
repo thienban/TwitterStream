@@ -16,6 +16,8 @@ const App: React.FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const term = inputs ? inputs.input1:"";
+    //const second = inputs ? inputs.input3:"";
+    //const term = first+','+second;
     fetch("http://localhost:3001/setSearchTerm",
       {
         method: "POST",
@@ -24,6 +26,7 @@ const App: React.FC = () => {
         },
         body: JSON.stringify({ term })
       })
+    setReset(false);
   }
   const handleReset = (e: any) => {
     e.preventDefault();
