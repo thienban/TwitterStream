@@ -15,13 +15,23 @@ const App: React.FC = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const term = inputs ? inputs.input1:"";
-    fetch("/setSearchTerm",
+    fetch("http://localhost:3001/setSearchTerm",
       {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ term })
+      })
+  }
+  const handleReset = (e: any) => {
+    e.preventDefault();
+    fetch("http://localhost:3001/pause",
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
       })
   }
   return (
@@ -41,7 +51,7 @@ const App: React.FC = () => {
 
       />
       <Button label="GO" onClick={handleSubmit}/>
-      <Button label="RESET" onClick={handleSubmit}/>
+      <Button label="RESET" onClick={handleReset}/>
       </Grid2Columns>
       <Grid1Columns>
         <List/>
