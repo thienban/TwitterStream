@@ -21,8 +21,6 @@ module.exports = (app, io) => {
         console.log('Resuming for ' + app.locals.searchTerm);
         twitter.stream('statuses/filter', { track: app.locals.searchTerm }, (stream) => {
             stream.on('data', (tweet) => {
-                console.log("tweet");
-                console.log(tweet);
                 sendMessage(tweet);
             });
 
@@ -42,6 +40,13 @@ module.exports = (app, io) => {
         app.locals.searchTerm = term;
         twitterStream.destroy();
         stream();
+    });
+    /**
+     * Pauses the twitter stream.
+     */
+    app.post('/pause', (req, res) => {
+        console.log('Pause');
+        twitterStream.destroy();
     });
 
     //Establishes socket connection.
