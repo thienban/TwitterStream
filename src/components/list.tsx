@@ -11,9 +11,9 @@ const TweetList: React.FC<ListProps> = ({mustReset = false}) => {
     useEffect(() => {
         const socket = socketIOClient('http://localhost:3001/');
         socket.on("tweets", (data: any[]) => {
-          console.info(data);
-          let newList = [data].concat(list.slice(0, 15));
-          setList(newList);
+          console.log(data);
+          // let newList = [data].concat(list.slice(0, 15));
+          // setList(newList);
         });
         socket.on('disconnect', () => {
             socket.off("tweets")

@@ -5,6 +5,7 @@ import Button from './components/button'
 import {useUserfrom} from './hooks/formHook';
 import List from './components/list';
 import styled from "styled-components";
+import { classBody } from '@babel/types';
 
 const App: React.FC = () => {
   const [reset, setReset] = useState(false);
@@ -15,7 +16,9 @@ const App: React.FC = () => {
   console.log(inputs);
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const term = inputs ? inputs.input1:"";
+    const term1 = inputs ? inputs.input1:"";
+    const term2 = inputs ? inputs.input2:"";
+    let term = term1
     fetch("http://localhost:3001/setSearchTerm",
       {
         method: "POST",
@@ -23,6 +26,20 @@ const App: React.FC = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ term })
+
+      }).then(res => {
+        term = term2;
+        console.log(term);
+        setTimeout(()=>{
+          fetch("http://localhost:3001/setSearchTerm",
+          {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ term })
+          })
+        },1000)
       })
   }
   const handleReset = (e: any) => {

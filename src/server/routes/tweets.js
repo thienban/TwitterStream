@@ -10,6 +10,7 @@ module.exports = (app, io) => {
 
     let socketConnection;
     let twitterStream = {};
+    let messages = []
 
     /**
      * Resumes twitter stream.
@@ -19,7 +20,8 @@ module.exports = (app, io) => {
         twitter.stream('statuses/filter', { track: term }, (stream) => {
             twitterStream = stream;
             stream.on('data', (tweet) => {
-                sendMessage(tweet);
+                addMessage(tweet)
+                //sendMessage(tweet);
             });
 
             stream.on('error', (error) => {
@@ -35,7 +37,7 @@ module.exports = (app, io) => {
     app.post('/setSearchTerm', (req, res) => {
         let term = req.body.term;
         res.send('SetSearchTerm')
-        destroyStream(twitterStream);
+       //destroyStream(twitterStream);
         stream(term);
     });
     /**
@@ -68,5 +70,9 @@ module.exports = (app, io) => {
             console.log("Destroy Stream");
             stream.destroy();
         }
+    }
+    const addMessage = (msg) => {
+        messages.push(msg);
+        sendMessage(messages);
     }
 };
