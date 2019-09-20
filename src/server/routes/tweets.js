@@ -15,42 +15,29 @@ module.exports = (app, io) => {
     /**
      * Resumes twitter stream.
      */
-    let numStream = 0;
     const init = () => {
         console.log(param1);
         console.log(param2);
         const stream1 = client.stream("statuses/filter", {
             track: param1});
         stream1.on("data", tweet => {
-              sendMessage(tweet);
-              numStream++;
-              if(numStream === 40) {
-                process.nextTick(() => {
-                    stream1.destroy();
-                    console.log('destroy 1');
-                });
-                numStream = 0;
-                setTimeout(() =>  {
-                    const stream2 = client.stream("statuses/filter", {
-                        track: param2})
-                    stream2.on("data", tweet => {
-                            sendMessage(tweet);
-                            numStream++;
-                            if(numStream === 40) {
-                                process.nextTick(() => {
-                                    stream2.destroy();
-                                    console.log('destroy 2');
-                                });
-                                init();
-                                numStream = 0;
-                            }
-                            twitterStream = stream2;
-                        })
-                }, 30000)
-            }
-          })
+            sendMessage(tweet);
+            twitterStream = stream1;
+        })
+        stream1.on("end", () => {
+            setTimeout(() =>  {
+                const stream2 = client.stream("statuses/filter", {
+                    track: param2})
+                stream2.on("data", tweet => {
+                    sendMessage(tweet);
+                    twitterStream = stream2;
+                })
+                stream2.on("end", () => {
+                    setTimeout(()=>init(),30000);
+                })
+            }, 30000)
+        })
         stream1.on("error", error => console.log("error", error));
-        twitterStream = stream1;
     }
     /**
      * Sets search term for twitter stream.
@@ -80,9 +67,20 @@ module.exports = (app, io) => {
      * Emits data from stream.
      * @param {String} msg
      */
+    let numMsg = 0;
     const sendMessage = (msg) => {
         if (msg.text.includes('RT')) {
             return;
+        }
+        numMsg++;
+        if(numMsg === 40) {
+            process.nextTick(() => {
+                if(twitterStream) {
+                    twitterStream.destroy();
+                    console.log('destroy');
+                }
+                numMsg=0;
+            });
         }
         socketConnection.emit("tweets", msg);
         console.log("SendMessage")
