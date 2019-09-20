@@ -21,7 +21,7 @@ module.exports = (app, io) => {
         const stream1 = client.stream("statuses/filter", {
             track: param1});
         stream1.on("data", tweet => {
-            sendMessage(tweet);
+            sendMessage(tweet,"stream1");
             twitterStream = stream1;
         })
         stream1.on("end", () => {
@@ -29,7 +29,7 @@ module.exports = (app, io) => {
                 const stream2 = client.stream("statuses/filter", {
                     track: param2})
                 stream2.on("data", tweet => {
-                    sendMessage(tweet);
+                    sendMessage(tweet, "stream2");
                     twitterStream = stream2;
                 })
                 stream2.on("end", () => {
@@ -68,7 +68,7 @@ module.exports = (app, io) => {
      * @param {String} msg
      */
     let numMsg = 0;
-    const sendMessage = (msg) => {
+    const sendMessage = (msg, typeStream) => {
         if (msg.text.includes('RT')) {
             return;
         }
@@ -82,7 +82,13 @@ module.exports = (app, io) => {
                 numMsg=0;
             });
         }
-        socketConnection.emit("tweets", msg);
+        if(typeStream==="stream1") {
+            socketConnection.emit("tweets1", msg);
+        }
+        if(typeStream==="stream2") {
+            socketConnection.emit("tweets2", msg);
+        }
+        
         console.log("SendMessage")
     }
     const destroyStream = (stream) => {
