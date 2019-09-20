@@ -42,8 +42,8 @@ module.exports = (app, io) => {
                                     console.log('destroy 2');
                                 });
                                 init();
+                                numStream = 0;
                             }
-                            numStream = 0;
                             twitterStream = stream2;
                         })
                 }, 30000)
