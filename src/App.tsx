@@ -15,9 +15,9 @@ const App: React.FC = () => {
   console.log(inputs);
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const term = inputs ? inputs.input1:"";
-    //const second = inputs ? inputs.input3:"";
-    //const term = first+','+second;
+    const first = inputs ? inputs.input1:"";
+    const second = inputs ? inputs.input2:"";
+    const term = first+','+second;
     fetch("http://localhost:3001/setSearchTerm",
       {
         method: "POST",
