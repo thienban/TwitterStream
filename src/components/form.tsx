@@ -60,9 +60,7 @@ const Inputs: React.FC<{}> = () => {
         </Form>
         )}
       />
-      <Grid1Columns>
         <List mustReset={reset}/>
-      </Grid1Columns>
     </div>
     );
 };
