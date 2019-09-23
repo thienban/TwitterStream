@@ -2,6 +2,7 @@ import React from 'react';
 import {Grid1Columns} from './components/grid'
 import styled from "styled-components";
 import Form from './components/form';
+import Chart from './components/lineChart'
 
 const App: React.FC = () => {
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Grid1Columns>
         <p>Graphique</p>
       </Grid1Columns>
+      <Chart/>
     </Background>
   );
 }
