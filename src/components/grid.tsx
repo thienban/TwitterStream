@@ -12,5 +12,8 @@ export const Grid1Columns = styled.div`
   display: grid
   grid-template-columns: auto;
   grid-template-rows: auto auto
-  grid-gap: 10%
+  grid-gap: 1%
+  grid-template-areas:
+    ". a a ."
+    ". a a .";
 `;
