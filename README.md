@@ -1,8 +1,9 @@
 
 
-# Test technique React
+#  Twietter Stream
 
 This repository contains
 
-* Test technique ReactJS.docx : this files lists the instructions to follow
-* twitter-example.js : example of how to use the twitter streaming api 
+
+* Use the twitter streaming api
+* Technical Stack : React, Node, Socket IO, D3
