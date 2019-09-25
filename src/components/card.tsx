@@ -34,24 +34,29 @@ const Description = styled.p`
   color: black;
   font-weight: 300;
 `
-interface CardProps {
+interface Tweet {
     id: number
-    data: any
+    image: string
+    userName: string
+    screenName: string
+    text: string
+    date: number
 }
-const CardComponent: React.FC<CardProps> = ({id, data}) => {
+const CardComponent: React.FC =
+({id, image, userName, screenName, text, date } : Tweet) => {
         return (
             <Container key={id}>
                 <div>
-                    <StyledPhoto src={data.user.profile_image_url} alt={data.user.name}/>
+                    <StyledPhoto src={image} alt={userName}/>
                     <ActionButton>
-                        {new Date(data.created_at).toLocaleTimeString()}
+                        {new Date(date).toLocaleTimeString()}
                     </ActionButton>
                     <ActionButton>
-                    <a href={`https://twitter.com/${data.user.screen_name}`} target="_blank">{`@${data.user.screen_name}`}</a>
+                    <a href={`https://twitter.com/${screenName}`} target="_blank">{`@${screenName}`}</a>
                     </ActionButton>
                 </div>
                 <div>
-                    <Description>{data.text}</Description>
+                    <Description>{text}</Description>
                 </div>
             </Container>
         );
