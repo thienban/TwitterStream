@@ -3,13 +3,9 @@ import Card from './card'
 
 export interface Tweet {
     id: number
-    data: {
-        user: {
-            profile_image_url: string
-        }
-    }
     user: {
         name: string,
+        profile_image_url: string,
         screen_name: string
     }
     text: string,
@@ -23,7 +19,7 @@ const List: any = (props: { list: Tweet[] }) => {
     const listRender = props.list.map((x: Tweet) => (
         <Card
         id={x.id}
-        image={x.data.user.profile_image_url}
+        image={x.user.profile_image_url}
         userName={x.user.name}
         screenName= {x.user.screen_name}
         text= {x.text}
