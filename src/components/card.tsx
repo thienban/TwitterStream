@@ -34,7 +34,7 @@ const Description = styled.p`
   color: black;
   font-weight: 300;
 `
-interface Tweet {
+interface TweetCard {
     id: number
     image: string
     userName: string
@@ -42,7 +42,7 @@ interface Tweet {
     text: string
     date: number
 }
-const CardComponent: React.FC<Tweet> =
+const CardComponent: React.FC<TweetCard> =
 ( {id, image, userName, screenName, text, date} ) => {
         return (
             <Container key={id}>
