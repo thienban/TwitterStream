@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import { Formik, Field, Form, FormikActions } from 'formik';
 import List from './list';
-import {Grid1Columns} from './grid'
 
 
 interface Values {

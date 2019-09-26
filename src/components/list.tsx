@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import socketIOClient from "socket.io-client";
-import List from './listPres'
+import List, {Tweet} from './listPres'
 import {Grid2Columns} from './grid'
 
 interface ListProps {
@@ -12,12 +12,12 @@ const TweetListContainer: React.FC<ListProps> = ({mustReset = false}) => {
 
     useEffect(() => {
         const socket = socketIOClient('http://localhost:3001/');
-        socket.on("tweets1", (data: any[]) => {
+        socket.on("tweets1", (data: Tweet[]) => {
           console.info(data);
           let newList = [data].concat(list.slice(0, 15));
           setList(newList);
         });
-        socket.on("tweets2", (data: any[]) => {
+        socket.on("tweets2", (data: Tweet[]) => {
           console.info(data);
           let newList = [data].concat(list1.slice(0, 15));
           setList1(newList);
@@ -34,14 +34,10 @@ const TweetListContainer: React.FC<ListProps> = ({mustReset = false}) => {
     return (
         <Grid2Columns>
         <div>
-        {
           <List list ={list}/>
-        }
         </div>
         <div>
-        {
           <List list ={list1}/>
-        }
         </div>
       </Grid2Columns>
     )
