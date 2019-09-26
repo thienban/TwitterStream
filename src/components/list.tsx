@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import socketIOClient from "socket.io-client";
-import ListPre from './listPres'
+import List from './listPres'
 import {Grid2Columns} from './grid'
 
 interface ListProps {
@@ -35,12 +35,12 @@ const TweetListContainer: React.FC<ListProps> = ({mustReset = false}) => {
         <Grid2Columns>
         <div>
         {
-          <ListPre list ={list}/>
+          <List list ={list}/>
         }
         </div>
         <div>
         {
-          <ListPre list ={list1}/>
+          <List list ={list1}/>
         }
         </div>
       </Grid2Columns>

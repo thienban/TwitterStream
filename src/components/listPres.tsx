@@ -1,6 +1,9 @@
 import React from 'react';
 import Card from './card'
 
+interface ListProps {
+    list: Tweet[]
+}
 interface Tweet {
     id: number
     data: {
@@ -16,22 +19,22 @@ interface Tweet {
     created_at: number
 }
 
-const List: React.FC = (props: Tweet[]) => {
+const List: React.FC<ListProps> = ({list}) => {
     const loading = <div>
       <p>Listening to Streams</p>
     </div>
-    const list = props.map((x: Tweet) => (
+    const listRender = list.map((x: Tweet) => (
         <Card
         id={x.id}
         image={x.data.user.profile_image_url}
         userName={x.user.name}
-        screnName= {x.user.screen_name}
+        screenName= {x.user.screen_name}
         text= {x.text}
         date={x.created_at}
         />
     ))
     return (
-        list.length > 0 ? list : loading
+        listRender.length > 0 ? listRender : loading
     );
 }
 

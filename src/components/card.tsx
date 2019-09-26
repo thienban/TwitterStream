@@ -42,8 +42,8 @@ interface Tweet {
     text: string
     date: number
 }
-const CardComponent: React.FC =
-({id, image, userName, screenName, text, date } : Tweet) => {
+const CardComponent: React.FC<Tweet> =
+( {id, image, userName, screenName, text, date} ) => {
         return (
             <Container key={id}>
                 <div>
