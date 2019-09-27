@@ -12,22 +12,37 @@ export interface Tweet {
     created_at: number
 }
 
-const List: any = (props: { list: Tweet[] }) => {
-    const loading = <div>
-      <p>Listening to Streams</p>
-    </div>
-    const listRender = props.list.map((x: Tweet) => (
+interface ListProps {
+    list?: Tweet[];
+}
+
+const Loading = () => {
+    return (
+        <div>
+            <p>Listening to Streams</p>
+        </div>
+    )
+}
+
+const List: React.FunctionComponent<ListProps> = ({ list = []}) => {
+
+    const listRender = list.map((x: Tweet) => (
         <Card
-        id={x.id}
-        image={x.user.profile_image_url}
-        userName={x.user.name}
-        screenName= {x.user.screen_name}
-        text= {x.text}
-        date={x.created_at}
+            id={x.id}
+            image={x.user.profile_image_url}
+            userName={x.user.name}
+            screenName={x.user.screen_name}
+            text={x.text}
+            date={x.created_at}
         />
     ))
     return (
-        props.list.length > 0 ? listRender : loading
+        <div>
+            {
+                list.length > 0 ? listRender : <Loading />
+            }
+        </div>
+
     );
 }
 
